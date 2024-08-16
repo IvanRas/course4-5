@@ -18,6 +18,7 @@ class Product:
         price = new_product["price"]
         quantity = new_product["quantity"]
         return cls(name, description, price, quantity)
+
     # доп
     # for name in new_product:      # нужно проити перебором по именам
     #     if name in :              # если имя было в старом списке то
@@ -26,16 +27,16 @@ class Product:
     #         continue
 
     @property
-    def get_products(self):
+    def price(self):
         # return f"{self.name}, {self.description}, {self.price}, {self.quantity}"
         return self.__price
 
-    @get_products.setter
-    def get_products(self, new_prise):
+    @price.setter
+    def price(self, new_prise):
         if new_prise <= 0:
             return "Цена не должна быть нулевая или отрицательная"
         else:
-            self.price = new_prise
+            self.__price = new_prise
 
 
 class Category:
@@ -61,10 +62,10 @@ class Category:
         Category.product_count += 1
 
     @property
-    def get_product_list(self):
+    def products(self):
         product_str = ""
         for i in self.__products:
-            product_str += f"{i.name}, {i.description}руб. Остаток: {i.products}шт."
+            product_str += f"{i.name}, {i.price} руб. Остаток: {i.quantity} шт."
         return product_str
 
 
