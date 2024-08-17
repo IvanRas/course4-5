@@ -50,8 +50,8 @@ class Category:
     products: str  # список товаров категории
 
     def __init__(self, name, description, products):
-        self.__name = name
-        self.__description = description
+        self.name = name
+        self.description = description
         self.__products = products
 
         Category.category_count += 1
