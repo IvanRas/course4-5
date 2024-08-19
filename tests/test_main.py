@@ -19,7 +19,7 @@ def test_category(category):
 
 def test_new_price(samsung):
     samsung.price = -100
-    assert samsung.price == "Цена не должна быть нулевая или отрицательная"
+    assert samsung.price == 180000.0
     samsung.price = 100
     assert samsung.price == 100
     samsung.price = 1
