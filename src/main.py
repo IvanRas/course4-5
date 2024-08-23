@@ -15,7 +15,7 @@ class Product:
         return f"{self.name},{self.__price} руб. Остаток: {self.quantity}"
 
     def __add__(self, other):
-        return self.price * self.quantity + other.price * other.quantity
+        return (self.price * self.quantity) + (other.price * other.quantity)
 
     @classmethod
     def new_product(cls, new_product: dict):
@@ -38,7 +38,7 @@ class Product:
         return self.__price
 
     @price.setter
-    def price(self, new_prise):
+    def price(self, new_prise: float):
         if new_prise <= 0:
             print("Цена не должна быть нулевая или отрицательная")
         else:
@@ -55,27 +55,27 @@ class Category:
     description: str  # описание продукта
     products: list  # список товаров категории
 
-    def __init__(self, name, description, products):
+    def __init__(self, name: str, description: str, products: list):
         self.name = name
         self.description = description
         self.__products = products
 
         Category.category_count += 1
-        Category.product_count += 1
+        Category.product_count += len(products)
 
     def __str__(self):
-        for i in self.__products:
-            return f"{self.name}, количество продуктов: {i.quantity}шт"
+        total_quantity = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
 
-    def add_product(self, product: Product):
+    def add_product(self, product: Product) -> None:
         self.__products.append(product)
         Category.product_count += 1
 
     @property
-    def products(self):
+    def products(self) -> str:
         product_str = ""
         for i in self.__products:
-            product_str += f"{i.name}, {i.price} руб. Остаток: {i.quantity} шт.\n"
+            product_str += f"{str(i)}\n"
         return product_str
 
 
