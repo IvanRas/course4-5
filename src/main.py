@@ -8,8 +8,18 @@ class BaseProduct(ABC):
         pass
 
 
-class Product(BaseProduct):
-    """ Информация о свойтвах продуктах"""
+class MixinLog:
+
+    def __init__(self):
+        print(repr(self))
+
+    def __repr__(self):
+        print(f"{self.__class__.__name__} ({self.name}, {self.description}, {self.price, self.quantity}")
+
+
+class Product(BaseProduct, MixinLog):
+    """Информация о свойтвах продуктах"""
+
     name: str  # название продукта
     description: str  # описание  продукта
     price: str  # цена  продукта
@@ -17,6 +27,10 @@ class Product(BaseProduct):
 
     def __init__(self, name, description, price, quantity):
         super().__init__()
+
+    # def __init__(self, name, description, price, quantity):
+    #     super().__init__(self.__repr__)
+
         self.name = name
         self.description = description
         self.__price = price
@@ -56,30 +70,18 @@ class Product(BaseProduct):
             self.__price = new_prise
 
 
-class MixinLog(Product):
-
-    def __init__(self, name, description, price, quantity):
-        super().__init__(name, description, price, quantity)
-        self.order_log()
-
-    def order_log(self):
-        print(f'{self.name, self.description, self.price, self.quantity}')
-
-
-class MixinLog:
-
-    def __init__(self, name, description, price, quantity):
-        super().__init__(name, description, price, quantity)
-        self.order_log()
-
-    def order_log(self):
-        print(f'{self.name, self.description, self.price, self.quantity}')
+# class MixinLog(Product):
+#
+#     def __init__(self, name, description, price, quantity):
+#         super().__init__(name, description, price, quantity)
+#         self.order_log()
+#
+#     def order_log(self):
+#         print(f'{self.name, self.description, self.price, self.quantity}')
 
 
-class Smartphone(Product, MixinLog):
-# class Smartphone(MixinLog):
-
-    """ Информация о смартфоне """
+class Smartphone(Product):
+    """Информация о смартфоне"""
 
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
         super().__init__(name, description, price, quantity)
@@ -95,14 +97,13 @@ class Smartphone(Product, MixinLog):
 
     def __add__(self, other):
         if not isinstance(other, Smartphone):
-            raise TypeError('Складывать можно только объекты Smartphone')
+            raise TypeError("Складывать можно только объекты Smartphone")
         return (self.price * self.quantity) + (other.price * other.quantity)
         # return f"{self.name},{self.__price} руб. Остаток: {self.quantity}"
 
 
-class LawnGrass(Product, MixinLog):
-# class LawnGrass(MixinLog):
-    """ Информация о Трава газонная """
+class LawnGrass(Product):
+    """Информация о Трава газонная"""
 
     def __init__(self, name, description, price, quantity, country, germination_period, color):
         super().__init__(name, description, price, quantity)
@@ -116,13 +117,13 @@ class LawnGrass(Product, MixinLog):
 
     def __add__(self, other):
         if not isinstance(other, LawnGrass):
-            raise TypeError('Складывать можно только объекты LawnGrass')
+            raise TypeError("Складывать можно только объекты LawnGrass")
         return (self.price * self.quantity) + (other.price * other.quantity)
         # return f"{self.name},{self.__price} руб. Остаток: {self.quantity}"
 
 
 class Category:
-    """ Информация о котегориях """
+    """Информация о котегориях"""
 
     category_count = 0
     product_count = 0
@@ -155,7 +156,7 @@ class Category:
         return product_str
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
@@ -175,10 +176,11 @@ if __name__ == '__main__':
     print(product3.price)
     print(product3.quantity)
 
-    category1 = Category("Смартфоны",
-                         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для "
-                         "удобства жизни",
-                         [product1, product2, product3])
+    category1 = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для " "удобства жизни",
+        [product1, product2, product3],
+    )
 
     print(category1.name == "Смартфоны")
     print(category1.description)
@@ -186,11 +188,12 @@ if __name__ == '__main__':
     print(category1.category_count)
     print(category1.product_count)
 
-    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
-    category2 = Category("Телевизоры",
-                         "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и "
-                         "помощником",
-                         [product4])
+    product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
+    category2 = Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и " "помощником",
+        [product4],
+    )
 
     print(category2.name)
     print(category2.description)

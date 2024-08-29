@@ -1,6 +1,6 @@
 import pytest
 
-from src.main import Product, Category, Smartphone, LawnGrass
+from src.main import Category, LawnGrass, Product, Smartphone
 
 
 def test_product(samsung):  # тест на продукт
@@ -32,8 +32,9 @@ def test_grass(grass):  # тест на продукт
 
 
 def test_add_smartphone():
-    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
-                             "S23 Ultra", 256, "Серый")
+    smartphone1 = Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
     smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
     grass2 = LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15, "США", "5 дней", "Темно-зеленый")
 
@@ -59,12 +60,7 @@ def test_add_grass():
 
 def test_product_creation():
     # Фикстура для теста
-    product_data = {
-        "name": "Товар 1",
-        "description": "Описание товара 1",
-        "price": 100.0,
-        "quantity": 20
-    }
+    product_data = {"name": "Товар 1", "description": "Описание товара 1", "price": 100.0, "quantity": 20}
 
     product = Product.new_product(product_data)
 
@@ -89,14 +85,21 @@ def test_new_price(samsung):
 
 
 def test_new_product(new_product):  # тест на продукт
-    assert new_product == ("Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.Iphone 15, 210000.0 руб. Остаток: 8 "
-                           "шт.Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.")
+    assert new_product == (
+        "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.Iphone 15, 210000.0 руб. Остаток: 8 "
+        "шт.Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт."
+    )
 
 
 def test_new_product_2():
-    name_product = Product.new_product({"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет, 200MP "
-                                                                                           "камера", "price": 180000.0,
-                                        "quantity": 5})
+    name_product = Product.new_product(
+        {
+            "name": "Samsung Galaxy S23 Ultra",
+            "description": "256GB, Серый цвет, 200MP " "камера",
+            "price": 180000.0,
+            "quantity": 5,
+        }
+    )
     assert name_product.name == "Samsung Galaxy S23 Ultra"
     assert name_product.description == "256GB, Серый цвет, 200MP камера"
     assert name_product.price == 180000.0
@@ -109,7 +112,7 @@ def test_category_add_product():
 
     category.add_product(product)
 
-    assert len(category.products.split('\n')) - 1 == 1
+    assert len(category.products.split("\n")) - 1 == 1
 
 
 def test_category_all_products_count():
@@ -126,4 +129,3 @@ def test_add_product():
     sum_product = product1 + product2
 
     assert sum_product == 800.0
-
