@@ -1,6 +1,6 @@
 import pytest
 
-from src.main import Product, Category
+from src.main import Product, Category, Smartphone, LawnGrass
 
 
 def test_product(samsung):  # тест на продукт
@@ -8,6 +8,53 @@ def test_product(samsung):  # тест на продукт
     assert samsung.description == "256GB, Серый цвет, 200MP камера"
     assert samsung.price == 180000.0
     assert samsung.quantity == 5
+
+
+def test_smartphone(smartphone):  # тест на продукт
+    assert smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert smartphone.description == "256GB, Серый цвет, 200MP камера"
+    assert smartphone.price == 180000.0
+    assert smartphone.quantity == 5
+    assert smartphone.efficiency == 95.5
+    assert smartphone.model == "S23 Ultra"
+    assert smartphone.memory == 256
+    assert smartphone.color == "Серый"
+
+
+def test_grass(grass):  # тест на продукт
+    assert grass.name == "Газонная трава"
+    assert grass.description == "Элитная трава для газона"
+    assert grass.price == 500.0
+    assert grass.quantity == 20
+    assert grass.country == "Россия"
+    assert grass.germination_period == "7 дней"
+    assert grass.color == "Зеленый"
+
+
+def test_add_smartphone():
+    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
+                             "S23 Ultra", 256, "Серый")
+    smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
+    grass2 = LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15, "США", "5 дней", "Темно-зеленый")
+
+    sum_product1 = smartphone1 + smartphone2
+    # sum_product2 = smartphone1 + grass2
+
+    assert sum_product1 == 2580000.0
+    # assert sum_product2 == 'Складывать можно только объекты Smartphone'
+
+
+def test_add_grass():
+    grass1 = LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+
+    smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
+    grass2 = LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15, "США", "5 дней", "Темно-зеленый")
+
+    grass_sum = grass1 + grass2
+    # sum_product2 = smartphone2 + grass2
+
+    assert grass_sum == 16750.0
+    # assert sum_product2 == TypeError('Складывать можно только объекты LawnGrass')
 
 
 def test_product_creation():
