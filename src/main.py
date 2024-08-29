@@ -9,12 +9,8 @@ class BaseProduct(ABC):
 
 
 class MixinLog:
-
-    def __init__(self):
-        print(repr(self))
-
     def __repr__(self):
-        print(f"{self.__class__.__name__} ({self.name}, {self.description}, {self.price, self.quantity}")
+        return f"{self.__class__.__name__} ({self.name}, {self.description}, {self.price}, {self.quantity})"
 
 
 class Product(BaseProduct, MixinLog):
@@ -28,8 +24,8 @@ class Product(BaseProduct, MixinLog):
     def __init__(self, name, description, price, quantity):
         super().__init__()
 
-    # def __init__(self, name, description, price, quantity):
-    #     super().__init__(self.__repr__)
+        # def __init__(self, name, description, price, quantity):
+        #     super().__init__(self.__repr__)
 
         self.name = name
         self.description = description

@@ -129,3 +129,8 @@ def test_add_product():
     sum_product = product1 + product2
 
     assert sum_product == 800.0
+
+
+def test_mixin_log():
+    product1 = Product("Продукт1", "Описание продукта", 1200, 10)
+    assert product1 == Product("Продукт1", "Описание продукта", 1200, 10)
