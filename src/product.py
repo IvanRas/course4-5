@@ -11,8 +11,7 @@ class BaseProduct(ABC):
 
 
 # class Product(MixinLog, BaseProduct):
-class Product(BaseProduct, MixinLog,):
-
+class Product(BaseProduct, MixinLog):
     """Информация о свойтвах продуктах"""
 
     name: str  # название продукта
@@ -24,8 +23,8 @@ class Product(BaseProduct, MixinLog,):
         super().__init__()
         # super().__init__(name, description, price)
 
-        # def __init__(self, name, description, price, quantity):
-        #     super().__init__(self.__repr__)
+        ## def __init__(self, name, description, price, quantity):
+        ##     super().__init__(self.__repr__)
 
         self.name = name
         self.description = description
@@ -46,13 +45,6 @@ class Product(BaseProduct, MixinLog,):
         quantity = new_product["quantity"]
         return cls(name, description, price, quantity)
 
-    # доп
-    # for name in new_product:      # нужно проити перебором по именам
-    #     if name in :              # если имя было в старом списке то
-    #         quantity += quantity  # к стараму кол-во добавить новое
-    #     else:                     № иначе переити к следующему имени
-    #         continue
-
     @property
     def price(self):
         # return f"{self.name}, {self.description}, {self.price}, {self.quantity}"
@@ -64,16 +56,6 @@ class Product(BaseProduct, MixinLog,):
             print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = new_prise
-
-
-# class MixinLog(Product):
-#
-#     def __init__(self, name, description, price, quantity):
-#         super().__init__(name, description, price, quantity)
-#         self.order_log()
-#
-#     def order_log(self):
-#         print(f'{self.name, self.description, self.price, self.quantity}')
 
 
 class Smartphone(Product):
