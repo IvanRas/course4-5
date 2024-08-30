@@ -38,7 +38,7 @@ def new_product():
 
 @pytest.fixture
 def mixin_log():
-    return Product("Продукт1", "Описание продукта", 1200, 10)
+    return Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
 
 
 # @pytest.fixture

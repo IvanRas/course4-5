@@ -133,5 +133,6 @@ def test_add_product():
 
 
 def test_mixin_log():
-    product1 = Product("Продукт1", "Описание продукта", 1200, 10)
-    assert product1 == Product("Продукт1", "Описание продукта", 1200, 10)
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    assert product1 == Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    # assert product1 == Product("Продукт1", "Описание продукта", 1200, 10)
