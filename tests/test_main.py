@@ -1,6 +1,7 @@
 import pytest
 
-from src.main import Category, LawnGrass, Product, Smartphone
+from src.category import Category
+from src.product import Product, LawnGrass, Smartphone
 
 
 def test_product(samsung):  # тест на продукт
