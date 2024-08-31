@@ -11,7 +11,7 @@ class BaseProduct(ABC):
 
 
 # class Product(MixinLog, BaseProduct):
-class Product(BaseProduct, MixinLog):
+class Product(MixinLog, BaseProduct):
     """Информация о свойтвах продуктах"""
 
     name: str  # название продукта
@@ -20,7 +20,6 @@ class Product(BaseProduct, MixinLog):
     quantity: float  # количество продукта
 
     def __init__(self, name, description, price, quantity):
-        super().__init__()
         # super().__init__(name, description, price)
 
         ## def __init__(self, name, description, price, quantity):
@@ -30,6 +29,8 @@ class Product(BaseProduct, MixinLog):
         self.description = description
         self.__price = price
         self.quantity = quantity
+
+        super().__init__()
 
     def __str__(self):
         return f"{self.name},{self.__price} руб. Остаток: {self.quantity}"

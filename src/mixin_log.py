@@ -1,7 +1,8 @@
 class MixinLog:
 
     def __init__(self):
-        super().__init__()
+        # super().__init__()
+        print(repr(self))
 
     # def __init__(self, name, description, price, quantity):
     #     self.name = name

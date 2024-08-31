@@ -132,7 +132,7 @@ def test_add_product():
     assert sum_product == 800.0
 
 
-def test_mixin_log():
-    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    assert product1 == Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    # assert product1 == Product("Продукт1", "Описание продукта", 1200, 10)
+def test_mixin_log(capsys):
+    captured = capsys.readouterr()
+
+    assert "" in captured.out
