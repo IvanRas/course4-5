@@ -133,6 +133,6 @@ def test_add_product():
 
 
 def test_mixin_log(capsys):
+    Product('a', 'b',  1, 2)
     captured = capsys.readouterr()
-
-    assert "" in captured.out
+    assert "Product (a, b, 1, 2)" in captured.out
