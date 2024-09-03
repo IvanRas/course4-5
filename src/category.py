@@ -1,6 +1,30 @@
 from src.product import Product
 
 
+class AveragePrice(Exception):
+    """Общий класс исключения для скриптов"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Неизвестная ошибка скрипта.'
+
+    def __str__(self):
+        return self.message
+
+
+class ThereIsNoProduct(AveragePrice):
+    """Класс исключения при отсутствии товара """
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Товар отсутвует.'
+
+
+class IncorrectAmount(AveragePrice):
+    """Класс исключения при отсутствии товара """
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else ''
+
+
 class Category:
     """Информация о котегориях"""
 
@@ -33,3 +57,14 @@ class Category:
         for i in self.__products:
             product_str += f"{str(i)}\n"
         return product_str
+
+    def average_price(self, product: Product):
+        try:
+            for i in self.__products:
+                total_price = i * product.quantity
+            av_price = total_price / Category.product_count
+            return f"cредний ценник всех товаров:{av_price}"
+        except ZeroDivisionError:
+            print("Ошибка: сумма товаров делиться на ноль")
+        except ThereIsNoProduct:
+            print("В категории нет товаров")
