@@ -28,7 +28,12 @@ class Product(MixinLog, BaseProduct):
         self.name = name
         self.description = description
         self.__price = price
-        self.quantity = quantity
+        try:
+            self.quantity = quantity
+            raise TypeError
+        except TypeError as e:
+            print(e)
+            print("Товар с нулевым количеством не может быть добавлен")
 
         super().__init__()
 
@@ -99,3 +104,27 @@ class LawnGrass(Product):
             raise TypeError("Складывать можно только объекты LawnGrass")
         return (self.price * self.quantity) + (other.price * other.quantity)
         # return f"{self.name},{self.__price} руб. Остаток: {self.quantity}"
+
+
+class ShellScriptError(Exception):
+    """Общий класс исключения для скриптов"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Неизвестная ошибка скрипта.'
+
+    def __str__(self):
+        return self.message
+
+
+class ShellScriptEmpty(ShellScriptError):
+    """Класс исключения при отсутствии кода скрипта"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Файл пустой.'
+
+
+class ShellScriptShebang(ShellScriptError):
+    """Класс исключения при отсутствии shebang"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'В файле отсутствует shebang.'
